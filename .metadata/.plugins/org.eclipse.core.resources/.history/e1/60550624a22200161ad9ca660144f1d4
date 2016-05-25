@@ -6,7 +6,7 @@ public class Cell {
 	private int y;
 	
 	public boolean equals(){
-		return true;
+		
 	}
 	
 	public void setX(int x){

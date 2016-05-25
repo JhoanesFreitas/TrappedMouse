@@ -5,8 +5,8 @@ public class Cell {
 	private int x;
 	private int y;
 	
-	public boolean equals(){
-		return true;
+	public boolena equals(){
+		
 	}
 	
 	public void setX(int x){

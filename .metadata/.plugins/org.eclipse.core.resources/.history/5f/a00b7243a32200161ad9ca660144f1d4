@@ -1,0 +1,11 @@
+package br.com.jho.al.maze;
+
+public class Maze {
+	
+	private Cell currentCell;
+	private Cell exitCell;
+	private Cell entryCell;
+	private const char EXITMARKER = 'e';
+	private const char 
+	
+}
