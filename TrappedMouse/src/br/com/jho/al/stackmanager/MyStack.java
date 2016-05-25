@@ -2,20 +2,14 @@ package br.com.jho.al.stackmanager;
 
 import br.com.jho.al.maze.Cell;
 
-public class MyStack {
+public class MyStack<T> {
 	
-	Cell[] mazeStack;
+	private T[] mazeStack;
 	private int position;
 
 	public MyStack(int size) {
 
-		mazeStack = new Cell[size];
-		position = -1;
-	}
-
-	public MyStack() {
-		
-		mazeStack = new Cell[10];
+		mazeStack = (T[]) new Object[size];
 		position = -1;
 	}
 
@@ -34,7 +28,7 @@ public class MyStack {
 		return mazeStack.length;
 	}
 
-	public void push(Cell element) {
+	public void push(T element) {
 		
 		if (position < mazeStack.length)
 			mazeStack[++position] = element;
@@ -44,9 +38,9 @@ public class MyStack {
 		}
 	}
 
-	public Cell pop() {
+	public T pop() {
 		
-		Cell recValue;
+		T recValue;
 		
 		if (!isEmpty()) {
 			recValue = mazeStack[position];
@@ -64,7 +58,7 @@ public class MyStack {
 
 	public void print() {
 		
-		Cell tempValue;
+		T tempValue;
 		MyStack mystack =  new MyStack(mazeStack.length);
 		
 		if (!isEmpty()) {
@@ -75,7 +69,7 @@ public class MyStack {
 			}
 			
 			while (!mystack.isEmpty())
-				push(mystack.pop());
+				push((T) mystack.pop());
 		}			
 
 		else
