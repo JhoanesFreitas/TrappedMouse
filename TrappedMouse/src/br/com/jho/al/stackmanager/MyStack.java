@@ -1,18 +1,21 @@
 package br.com.jho.al.stackmanager;
 
+import br.com.jho.al.maze.Cell;
+
 public class MyStack {
-	int vector[] = {};
+	
+	Cell[] mazeStack;
 	private int position;
 
 	public MyStack(int size) {
 
-		vector = new int[size];
+		mazeStack = new Cell[size];
 		position = -1;
 	}
 
 	public MyStack() {
 		
-		vector = new int[10];
+		mazeStack = new Cell[10];
 		position = -1;
 	}
 
@@ -23,35 +26,30 @@ public class MyStack {
 
 	public boolean isFull() {
 		
-		return position == vector.length - 1;
+		return position == mazeStack.length - 1;
 	}
 
 	public int size() {
 		
-		return vector.length;
+		return mazeStack.length;
 	}
 
-	public int top() {
+	public void push(Cell element) {
 		
-		return position;
-	}
-
-	public void push(int element) {
-		
-		if (position < vector.length)
-			vector[++position] = element;
+		if (position < mazeStack.length)
+			mazeStack[++position] = element;
 		else {
 			System.out.println("Overflow");
 			throw new StackOverflowError("Stack Overflow");
 		}
 	}
 
-	public int pop() {
+	public Cell pop() {
 		
-		int recValue;
+		Cell recValue;
 		
 		if (!isEmpty()) {
-			recValue = vector[position];
+			recValue = mazeStack[position];
 			position--;
 		} else
 			throw new StackOverflowError("Stack Underflow");
@@ -66,8 +64,8 @@ public class MyStack {
 
 	public void print() {
 		
-		int tempValue;
-		MyStack mystack =  new MyStack(vector.length);
+		Cell tempValue;
+		MyStack mystack =  new MyStack(mazeStack.length);
 		
 		if (!isEmpty()) {
 			while (!isEmpty()) {
@@ -78,20 +76,10 @@ public class MyStack {
 			
 			while (!mystack.isEmpty())
 				push(mystack.pop());
-		}
-		
-		//else if (!mystack.isEmpty())
-			
+		}			
 
 		else
-			//System.out.println("Pilha vazia");
 			throw new StackOverflowError("Stack Underflow");
 	}
-	
-	public void fillStack() {
-		
-		for (int i = 0; i < 10; i++) {
-			vector[++position] = i+1;
-		}
-	}
+
 }
