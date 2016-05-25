@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;Maze.java&apos; to &apos;TrappedMouse/src/br.com.jho.al.maze&apos;&#x0A;- Original project: &apos;TrappedMouse&apos;&#x0A;- Destination element: &apos;TrappedMouse/src/br.com.jho.al.maze&apos;&#x0A;- Original element: &apos;br.com.jho.al.stackmanager.Maze.java&apos;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;br.com.jho.al.maze" element1="/src&lt;br.com.jho.al.stackmanager{Maze.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1464197528337" units="1" version="1.0"/>
+</session>
