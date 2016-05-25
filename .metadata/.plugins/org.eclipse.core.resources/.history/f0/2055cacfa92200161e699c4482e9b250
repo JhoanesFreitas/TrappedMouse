@@ -8,6 +8,7 @@ public class MyStack<T> {
 	private int position;
 
 	public MyStack(int size) {
+
 		mazeStack = (T[]) new Object[size];
 		position = -1;
 	}
