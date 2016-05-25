@@ -23,4 +23,9 @@ public class Maze {
 		// TODO Auto-generated method stub
 		return super.toString();
 	}
+	
+	/*public String toString(){
+		return null;
+	}*/
+	
 }

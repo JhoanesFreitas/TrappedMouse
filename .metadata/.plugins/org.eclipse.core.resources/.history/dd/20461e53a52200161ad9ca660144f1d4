@@ -14,13 +14,4 @@ public class Maze {
 	private final char WALL = 'w';
 	private MyStack mazeStack;
 	
-	public void exitMaze(){
-		
-	}
-	
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
 }
