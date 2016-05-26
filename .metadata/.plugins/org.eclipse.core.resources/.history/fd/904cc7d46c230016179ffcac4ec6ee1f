@@ -20,30 +20,6 @@ public class Maze {
 
 	}
 	
-	public void setBackTracking(MyStack<Cell> backTracking) {
-		this.backTracking = backTracking;
-	}
-	
-	public void setCurrentCell(Cell currentCell) {
-		this.currentCell = currentCell;
-	}
-	
-	public void setEntryCell(Cell entryCell) {
-		this.entryCell = entryCell;
-	}
-	
-	public void setExitCell(Cell exitCell) {
-		this.exitCell = exitCell;
-	}
-	 
-	public void setMaze(char[] maze) {
-		this.maze = maze;
-	}
-	
-	public void setMazeStack(MyStack<Cell> mazeStack) {
-		this.mazeStack = mazeStack;
-	}
-	
 	public MyStack<Cell> getBackTracking() {
 		return backTracking;
 	}
