@@ -36,7 +36,7 @@ public class Maze {
 		this.exitCell = exitCell;
 	}
 	 
-	public void setMaze(char[][] maze) {
+	public void setMaze(char[] maze) {
 		this.maze = maze;
 	}
 	
