@@ -12,7 +12,6 @@ public class Maze {
 	private final char VISITED = '.';
 	private final char PASSAGE = '0';
 	private final char WALL = '1';
-	private char [] maze;
 	private MyStack<Cell> mazeStack;
 	private MyStack<Cell> backTracking;
 

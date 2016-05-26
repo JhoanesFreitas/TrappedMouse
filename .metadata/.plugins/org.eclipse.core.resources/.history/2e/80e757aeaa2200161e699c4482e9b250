@@ -7,7 +7,6 @@ public class MyStack<T> {
 	private T[] mazeStack;
 	private int position;
 
-	@SuppressWarnings("unchecked")
 	public MyStack(int size) {
 		mazeStack = (T[]) new Object[size];
 		position = -1;
