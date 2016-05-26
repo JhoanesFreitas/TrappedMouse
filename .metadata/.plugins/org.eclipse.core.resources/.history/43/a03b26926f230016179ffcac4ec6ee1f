@@ -68,7 +68,7 @@ public class Maze {
 		return EXITMARKER;
 	}
 	
-	public char[][] getMaze() {
+	public char[] getMaze() {
 		return maze;
 	}
 	
