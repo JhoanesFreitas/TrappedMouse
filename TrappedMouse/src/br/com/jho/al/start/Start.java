@@ -28,7 +28,7 @@ public class Start<T> {
 			
 			//Erro aqui, tentei com set tbm... Ja tentei mudar la na classe
 			//MyStack, mas da erro ao executar
-			maze.getMazeStack().push(row);;
+			maze.getMazeStack().push(row);
 		}
 		
 		maze.getMazeStack().print();
