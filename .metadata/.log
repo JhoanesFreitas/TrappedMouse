@@ -86,3 +86,13 @@ Caused by: java.lang.NullPointerException
 	at org.eclipse.jface.action.Action.runWithEvent(Action.java:473)
 	at org.eclipse.jface.commands.ActionHandler.execute(ActionHandler.java:122)
 	... 60 more
+!SESSION 2016-05-27 12:43:26.368 -----------------------------------------------
+eclipse.buildId=4.5.0.I20150603-2000
+java.version=1.8.0_91
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-05-27 12:43:35.169
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
