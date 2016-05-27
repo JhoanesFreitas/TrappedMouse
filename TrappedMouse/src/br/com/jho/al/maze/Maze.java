@@ -20,6 +20,10 @@ public class Maze {
 
 	}
 	
+	public void initMaze(int size){
+		mazeStack = new MyStack<>(size);
+	}
+	
 	public void setBackTracking(MyStack<Cell> backTracking) {
 		this.backTracking = backTracking;
 	}
