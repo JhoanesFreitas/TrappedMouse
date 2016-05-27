@@ -25,7 +25,7 @@ public class Maze {
 	}
 	
 	public void setElementsArray(int l, int c, char value){
-		maze[l][c] = value;
+		
 	}
 	
 	public void initMaze(int size){

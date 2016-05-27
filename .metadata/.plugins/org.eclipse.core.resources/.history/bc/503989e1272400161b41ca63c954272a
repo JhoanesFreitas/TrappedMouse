@@ -44,7 +44,7 @@ public class Start {
 					
 				} else if (a[cont].equals(maze.getENTRYMARKER())) {
 					
-					maze.setElementsArray(linha, cont, maze.getENTRYMARKER());
+					maze.setElementsArray(linha, cont, maze.getENTRYMARKER()());
 					
 				} else if (a[cont].equals(maze.getEXITMARKER())) {
 					
@@ -60,18 +60,9 @@ public class Start {
 					
 				}
 				
-				Cell cell = new Cell();
-				
-				cell.setX(linha);
-				cell.setY(cont);
-				
-				maze.getMazeStack().push(cell);
-				
 				cont++;
 			}
-			
 			linha++;
-			
 		}
 
 		// Erro aqui, tentei com set tbm... Ja tentei mudar la na classe

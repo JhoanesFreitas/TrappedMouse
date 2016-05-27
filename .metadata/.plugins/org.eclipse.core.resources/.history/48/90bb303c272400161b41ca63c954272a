@@ -24,10 +24,6 @@ public class Maze {
 		maze = new char[size][size];
 	}
 	
-	public void setElementsArray(int l, int c, char value){
-		maze[l][c] = value;
-	}
-	
 	public void initMaze(int size){
 		mazeStack = new MyStack<>(size);
 	}

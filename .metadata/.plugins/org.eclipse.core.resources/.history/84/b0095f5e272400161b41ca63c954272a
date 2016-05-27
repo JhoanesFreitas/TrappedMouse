@@ -12,7 +12,6 @@ public class Start {
 
 		int size;
 		int cont = 0;
-		int linha = 0;
 		// char a = 'p';
 		String mazeRow;
 		String[] a;// = new String[10];
@@ -27,8 +26,6 @@ public class Start {
 
 		// mazeRow = new String[size];
 		stack = new MyStack(size);
-		maze.initArrayMaze(size);
-		
 
 		for (int i = 0; i < size; i++) {
 			System.out.println("Linha: ");
@@ -40,38 +37,18 @@ public class Start {
 
 				if (a[cont].equals(maze.getPASSAGE())) {
 					
-					maze.setElementsArray(linha, cont, maze.getPASSAGE());
-					
 				} else if (a[cont].equals(maze.getENTRYMARKER())) {
-					
-					maze.setElementsArray(linha, cont, maze.getENTRYMARKER());
-					
+
 				} else if (a[cont].equals(maze.getEXITMARKER())) {
-					
-					maze.setElementsArray(linha, cont, maze.getEXITMARKER());
-					
+
 				} else if (a[cont].equals(maze.getVISITED())) {
-					
-					maze.setElementsArray(linha, cont, maze.getVISITED());
-					
+
 				} else if (a[cont].equals(maze.getWALL())) {
-					
-					maze.setElementsArray(linha, cont, maze.getWALL());
-					
+
 				}
-				
-				Cell cell = new Cell();
-				
-				cell.setX(linha);
-				cell.setY(cont);
-				
-				maze.getMazeStack().push(cell);
 				
 				cont++;
 			}
-			
-			linha++;
-			
 		}
 
 		// Erro aqui, tentei com set tbm... Ja tentei mudar la na classe
