@@ -5,6 +5,16 @@ public class Cell {
 	private int x;
 	private int y;
 	
+	
+	public Cell() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Cell(int x, int y){
+		setX(x);
+		setY(y);
+	}
+	
 	public boolean equals(){
 		return true;
 	}
