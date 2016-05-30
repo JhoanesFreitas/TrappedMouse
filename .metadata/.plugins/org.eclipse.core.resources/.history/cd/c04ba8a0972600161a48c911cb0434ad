@@ -39,11 +39,11 @@ public class Start {
 
 		invertePilha(maze, aux, sizeRow, sizeCol);
 
-		printMaze(a, maze, aux, sizeRow, sizeCol);
+		printMaze(a, maze, sizeRow, sizeCol);
 
 	}
 
-	private static void printMaze(String[][] a, Maze maze, Maze aux, int sizeRow, int sizeCol) {
+	private static void printMaze(String[][] a, Maze maze, int sizeRow, int sizeCol) {
 
 		for (int i = 0; i < sizeRow + 2; i++) {
 			for (int j = 0; j < sizeCol + 2; j++) {
@@ -53,14 +53,12 @@ public class Start {
 				} else if (i == sizeRow + 1) {
 					a[i][j] = "1";
 				} else {
-					Cell cell = aux.getMazeStack().pop();
-					//System.out.println(cell.getX() + " " + cell.getY());
+					Cell cell = maze.getMazeStack().pop();
 					a[i][j] = maze.getElementMaze(cell.getX(), cell.getY());
 				}
 				System.out.print(a[i][j]);
 			}
 			System.out.println();
-			// maze.getMazeStack().print();
 		}
 	}
 

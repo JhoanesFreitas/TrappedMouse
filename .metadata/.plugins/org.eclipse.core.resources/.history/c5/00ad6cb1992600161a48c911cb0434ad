@@ -21,7 +21,7 @@ public class Start {
 
 		Maze maze = new Maze();
 		Maze aux = new Maze();
-
+		
 		System.out.println("Digite o número de linhas para o labirinto: ");
 		sizeRow = in.nextInt();
 
@@ -37,7 +37,7 @@ public class Start {
 
 		initMaze(maze, a, sizeRow, sizeCol);
 
-		invertePilha(maze, aux, sizeRow, sizeCol);
+		//invertePilha(maze, aux, sizeRow, sizeCol);
 
 		printMaze(a, maze, aux, sizeRow, sizeCol);
 
@@ -47,6 +47,7 @@ public class Start {
 
 		for (int i = 0; i < sizeRow + 2; i++) {
 			for (int j = 0; j < sizeCol + 2; j++) {
+				invertePilha(maze, aux, sizeRow, sizeCol);
 
 				if (i == 0) {
 					a[i][j] = "1";
@@ -54,21 +55,20 @@ public class Start {
 					a[i][j] = "1";
 				} else {
 					Cell cell = aux.getMazeStack().pop();
-					//System.out.println(cell.getX() + " " + cell.getY());
-					a[i][j] = maze.getElementMaze(cell.getX(), cell.getY());
+					a[i][j] = aux.getElementMaze(cell.getX(), cell.getY());
 				}
 				System.out.print(a[i][j]);
 			}
 			System.out.println();
-			// maze.getMazeStack().print();
+			//maze.getMazeStack().print();
 		}
 	}
 
 	private static void invertePilha(Maze maze, Maze aux, int sizeRow, int sizeCol) {
 
-		for (int i = 0; i < sizeRow * (sizeCol + 2); i++) {
+		//for (int i = 0; i < sizeRow * (sizeCol + 2); i++) {
 			aux.getMazeStack().push(maze.getMazeStack().pop());
-		}
+		//}
 	}
 
 	private static void initMaze(Maze maze, String[][] a, int sizeRow, int sizeCol) {

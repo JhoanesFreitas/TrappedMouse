@@ -30,67 +30,70 @@ public class Start {
 
 		initArrayAndStacks(maze, sizeRow, sizeCol);
 		initArrayAndStacks(aux, sizeRow, sizeCol);
-
+		
 		a = initArray(sizeRow, sizeCol);
 
 		fillMaze(a, sizeRow, sizeCol);
-
+		
 		initMaze(maze, a, sizeRow, sizeCol);
-
+		
 		invertePilha(maze, aux, sizeRow, sizeCol);
-
-		printMaze(a, maze, aux, sizeRow, sizeCol);
+		
+		printMaze(a, aux, sizeRow, sizeCol);
+		
+		
 
 	}
-
-	private static void printMaze(String[][] a, Maze maze, Maze aux, int sizeRow, int sizeCol) {
-
-		for (int i = 0; i < sizeRow + 2; i++) {
-			for (int j = 0; j < sizeCol + 2; j++) {
-
-				if (i == 0) {
+	
+	private static void printMaze(String[][] a, Maze maze, int sizeRow, int sizeCol){
+		
+		for(int i = 0; i < sizeRow + 2; i++){
+			for(int j = 0; j < sizeCol + 2; j++){
+				
+				if(i == 0){
 					a[i][j] = "1";
-				} else if (i == sizeRow + 1) {
+				}else if(i == sizeRow + 1){
 					a[i][j] = "1";
-				} else {
-					Cell cell = aux.getMazeStack().pop();
-					//System.out.println(cell.getX() + " " + cell.getY());
+				}
+				else{
+					Cell cell = maze.getMazeStack().pop();
 					a[i][j] = maze.getElementMaze(cell.getX(), cell.getY());
 				}
 				System.out.print(a[i][j]);
 			}
 			System.out.println();
-			// maze.getMazeStack().print();
 		}
 	}
-
+	
 	private static void invertePilha(Maze maze, Maze aux, int sizeRow, int sizeCol) {
-
-		for (int i = 0; i < sizeRow * (sizeCol + 2); i++) {
-			aux.getMazeStack().push(maze.getMazeStack().pop());
-		}
+		
+		for (int i = 0; i < sizeRow + 2; i++) {
+			for (int j = 0; j < sizeCol + 2; j++) {
+				aux.getMazeStack().push(maze.getMazeStack().pop());
+			}
+		}		
 	}
-
-	private static void initMaze(Maze maze, String[][] a, int sizeRow, int sizeCol) {
-
-		for (int i = 0; i < sizeRow; i++) {
-
+	
+	private static void initMaze(Maze maze, String[][] a, int sizeRow, int sizeCol){
+		
+		for(int i = 0; i < sizeRow; i++){
+			
 			maze.getMazeStack().push(new Cell(i, 0));
 			maze.setElementsArray(i, 0, "1");
-
-			for (int j = 0; j < sizeCol; j++) {
+			
+			for(int j = 0; j < sizeCol; j++){
 				maze.getMazeStack().push(new Cell(i, j + 1));
 				maze.setElementsArray(i, j + 1, a[i][j]);
 			}
-
+			
 			maze.getMazeStack().push(new Cell(i, sizeCol + 1));
 			maze.setElementsArray(i, sizeCol + 1, "1");
-
+			
 		}
-
+		
 	}
-
-	private static String[][] initArray(int sizeRow, int sizeCol) {
+	
+	private static String[][] initArray(int sizeRow, int sizeCol){
 		return new String[sizeRow + 2][sizeCol + 2];
 	}
 
@@ -99,16 +102,16 @@ public class Start {
 		maze.initArrayMaze(sizeRow, (sizeCol + 2));
 	}
 
-	private static void fillMaze(String[][] a, int sizeRow, int sizeCol) {
-
+	private static void fillMaze(String[][] a, int sizeRow, int sizeCol){
+		
 		System.out.println("Informe os valores: \n");
-
-		for (int i = 0; i < sizeRow; i++) {
-			for (int j = 0; j < sizeCol; j++) {
+		
+		for(int i = 0; i < sizeRow; i++){
+			for(int j = 0; j < sizeCol; j++){
 				a[i][j] = in.next();
 			}
 		}
-
+		
 	}
 
 }

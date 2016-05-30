@@ -37,7 +37,7 @@ public class Start {
 
 		initMaze(maze, a, sizeRow, sizeCol);
 
-		invertePilha(maze, aux, sizeRow, sizeCol);
+		// invertePilha(maze, aux, sizeRow, sizeCol);
 
 		printMaze(a, maze, aux, sizeRow, sizeCol);
 
@@ -53,6 +53,7 @@ public class Start {
 				} else if (i == sizeRow + 1) {
 					a[i][j] = "1";
 				} else {
+					invertePilha(maze, aux);
 					Cell cell = aux.getMazeStack().pop();
 					//System.out.println(cell.getX() + " " + cell.getY());
 					a[i][j] = maze.getElementMaze(cell.getX(), cell.getY());
@@ -64,11 +65,11 @@ public class Start {
 		}
 	}
 
-	private static void invertePilha(Maze maze, Maze aux, int sizeRow, int sizeCol) {
+	private static void invertePilha(Maze maze, Maze aux) {
 
-		for (int i = 0; i < sizeRow * (sizeCol + 2); i++) {
-			aux.getMazeStack().push(maze.getMazeStack().pop());
-		}
+		// for (int i = 0; i < sizeRow * (sizeCol + 2); i++) {
+		aux.getMazeStack().push(maze.getMazeStack().pop());
+		// }
 	}
 
 	private static void initMaze(Maze maze, String[][] a, int sizeRow, int sizeCol) {
