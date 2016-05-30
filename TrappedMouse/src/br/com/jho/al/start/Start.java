@@ -54,13 +54,12 @@ public class Start {
 					a[i][j] = "1";
 				} else {
 					Cell cell = aux.getMazeStack().pop();
-					//System.out.println(cell.getX() + " " + cell.getY());
 					a[i][j] = maze.getElementMaze(cell.getX(), cell.getY());
 				}
+				
 				System.out.print(a[i][j]);
 			}
 			System.out.println();
-			// maze.getMazeStack().print();
 		}
 	}
 
@@ -101,14 +100,15 @@ public class Start {
 
 	private static void fillMaze(String[][] a, int sizeRow, int sizeCol) {
 
+		String rec = "";
 		System.out.println("Informe os valores: \n");
-
+		
 		for (int i = 0; i < sizeRow; i++) {
-			for (int j = 0; j < sizeCol; j++) {
-				a[i][j] = in.next();
-			}
+			rec = in.next();
+			rec += "11";
+			a[i] = rec.split("");
 		}
-
+		
 	}
 
 }
