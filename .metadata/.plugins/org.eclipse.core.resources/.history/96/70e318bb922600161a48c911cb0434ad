@@ -51,10 +51,9 @@ public class Start {
 					a[i][j] = "1";
 				}
 				else{
-					Cell cell = maze.getMazeStack().pop();
-					a[i][j] = maze.getElementMaze(cell.getX(), cell.getY());
+					a[i][j] = maze.getMazeStack().pop();
 				}
-				System.out.print(a[i][j]);
+				//System.out.print(maze.getElementMaze(i, j));
 			}
 			System.out.println();
 		}

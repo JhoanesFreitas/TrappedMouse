@@ -34,27 +34,17 @@ public class Start {
 		
 		initMaze(maze, a, sizeRow, sizeCol);
 		
-		printMaze(a, maze, sizeRow, sizeCol);
+		printMaze(maze, sizeRow, sizeCol);
 		
 		
 
 	}
 	
-	private static void printMaze(String[][] a, Maze maze, int sizeRow, int sizeCol){
+	private static void printMaze(Maze maze, int sizeRow, int sizeCol){
 		
-		for(int i = 0; i < sizeRow + 2; i++){
+		for(int i = 0; i < sizeRow; i++){
 			for(int j = 0; j < sizeCol + 2; j++){
-				
-				if(i == 0){
-					a[i][j] = "1";
-				}else if(i == sizeRow + 1){
-					a[i][j] = "1";
-				}
-				else{
-					Cell cell = maze.getMazeStack().pop();
-					a[i][j] = maze.getElementMaze(cell.getX(), cell.getY());
-				}
-				System.out.print(a[i][j]);
+				System.out.print(maze.getElementMaze(i, j));
 			}
 			System.out.println();
 		}
@@ -72,7 +62,7 @@ public class Start {
 				maze.setElementsArray(i, j + 1, a[i][j]);
 			}
 			
-			maze.getMazeStack().push(new Cell(i, sizeCol + 1));
+			maze.getMazeStack().push(new Cell(i, sizeCol));
 			maze.setElementsArray(i, sizeCol + 1, "1");
 			
 		}
@@ -80,7 +70,7 @@ public class Start {
 	}
 	
 	private static String[][] initArray(int sizeRow, int sizeCol){
-		return new String[sizeRow + 2][sizeCol + 2];
+		return new String[sizeRow][sizeCol + 2];
 	}
 
 	private static void initArrayAndStacks(Maze maze, int sizeRow, int sizeCol) {

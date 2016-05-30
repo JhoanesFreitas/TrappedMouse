@@ -54,7 +54,7 @@ public class Start {
 					Cell cell = maze.getMazeStack().pop();
 					a[i][j] = maze.getElementMaze(cell.getX(), cell.getY());
 				}
-				System.out.print(a[i][j]);
+				//System.out.print(maze.getElementMaze(i, j));
 			}
 			System.out.println();
 		}
