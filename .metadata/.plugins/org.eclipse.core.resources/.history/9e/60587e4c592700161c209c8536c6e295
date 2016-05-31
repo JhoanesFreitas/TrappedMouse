@@ -29,13 +29,13 @@ public class Start {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		System.out.println("Informe os valores: \t - Enter duas vezes para terminar\n");
-
+		
 		try {
 
 			while (mazeRow.length() != 0) {
-
+				
 				mazeRow = br.readLine();
-
+				
 				if (mazeRow.length() != 0)
 					array.add(mazeRow);
 			}
@@ -44,26 +44,23 @@ public class Start {
 			e.printStackTrace();
 		}
 
-		if (!array.isEmpty()) {
-			sizeRow = array.size();
-			sizeCol = array.get(0).length();
+		sizeRow = array.size();
+		sizeCol = array.get(0).length();
 
-			initArrayAndStacks(maze, sizeRow, sizeCol);
-			initArrayAndStacks(aux, sizeRow, sizeCol);
+		initArrayAndStacks(maze, sizeRow, sizeCol);
+		initArrayAndStacks(aux, sizeRow, sizeCol);
 
-			a = initArray(sizeRow, sizeCol);
+		a = initArray(sizeRow, sizeCol);
 
-			fillMaze(a, array, sizeRow, sizeCol);
+		fillMaze(a, array, sizeRow, sizeCol);
 
-			initMaze(maze, a, sizeRow, sizeCol);
+		initMaze(maze, a, sizeRow, sizeCol);
 
-			invertePilha(maze, aux, sizeRow, sizeCol);
+		invertePilha(maze, aux, sizeRow, sizeCol);
 
-			printMaze(a, maze, aux, sizeRow, sizeCol);
-		}else
-			System.out.println("Nenhum valor informado!");
+		printMaze(a, maze, aux, sizeRow, sizeCol);
 
-	}
+	}				
 
 	private static void printMaze(String[][] a, Maze maze, Maze aux, int sizeRow, int sizeCol) {
 

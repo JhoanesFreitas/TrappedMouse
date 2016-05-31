@@ -44,10 +44,10 @@ public class Start {
 			e.printStackTrace();
 		}
 
-		if (!array.isEmpty()) {
-			sizeRow = array.size();
-			sizeCol = array.get(0).length();
+		sizeRow = array.size();
+		sizeCol = array.get(0).length();
 
+		if (!array.isEmpty()) {
 			initArrayAndStacks(maze, sizeRow, sizeCol);
 			initArrayAndStacks(aux, sizeRow, sizeCol);
 
@@ -60,8 +60,7 @@ public class Start {
 			invertePilha(maze, aux, sizeRow, sizeCol);
 
 			printMaze(a, maze, aux, sizeRow, sizeCol);
-		}else
-			System.out.println("Nenhum valor informado!");
+		}
 
 	}
 
