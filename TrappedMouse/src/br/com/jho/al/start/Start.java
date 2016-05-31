@@ -41,43 +41,7 @@ public class Start {
 
 		printMaze(a, maze, aux, sizeRow, sizeCol);
 
-	}
-
-		for (int i = 0; i < size; i++) {
-			System.out.println("Linha: ");
-
-			//row = in.next();
-			
-			//Erro aqui, tentei com set tbm... Ja tentei mudar la na classe
-			//MyStack, mas da erro ao executar
-			//maze.getMazeStack().push(row);
-
-			mazeRow = in.next();
-
-			a = mazeRow.split("");
-
-			while (cont < a.length) {
-
-				if (a[cont].equals(maze.getPASSAGE())) {
-					
-					maze.setElementsArray(linha, cont, maze.getPASSAGE());
-					
-				} else if (a[cont].equals(maze.getENTRYMARKER())) {
-					
-					maze.setElementsArray(linha, cont, maze.getENTRYMARKER());
-					
-				} else if (a[cont].equals(maze.getEXITMARKER())) {
-					
-					maze.setElementsArray(linha, cont, maze.getEXITMARKER());
-					
-				} else if (a[cont].equals(maze.getVISITED())) {
-					
-					maze.setElementsArray(linha, cont, maze.getVISITED());
-					
-				} else if (a[cont].equals(maze.getWALL())) {
-					
-					maze.setElementsArray(linha, cont, maze.getWALL());
-					
+	}				
 
 	private static void printMaze(String[][] a, Maze maze, Maze aux, int sizeRow, int sizeCol) {
 
