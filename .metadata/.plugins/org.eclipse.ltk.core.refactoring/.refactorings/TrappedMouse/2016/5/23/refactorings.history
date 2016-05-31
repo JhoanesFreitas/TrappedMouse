@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;size&apos; in &apos;br.com.jho.al.start.Start.main(...)&apos; to &apos;sizeRow&apos;&#x0A;- Original project: &apos;TrappedMouse&apos;&#x0A;- Original element: &apos;br.com.jho.al.start.Start.main(String[]).size&apos;&#x0A;- Renamed element: &apos;size&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;size&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;br.com.jho.al.start{Start.java[Start~main~\[QString;@size!232!240!236!239!I!0!false" name="sizeRow" references="true" stamp="1464625853301" version="1.0"/>
+</session>

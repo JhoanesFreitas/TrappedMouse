@@ -8,27 +8,40 @@ import br.com.jho.al.stackmanager.MyStack;
 
 public class Start {
 
+	private static Scanner in = new Scanner(System.in);
+
 	public static void main(String[] args) {
 
-		int size;
+		int sizeRow;
+		int sizeCol;
 		int cont = 0;
 		int linha = 0;
-		// char a = 'p';
 		String mazeRow;
-		String[] a;// = new String[10];
+		String[][] a = null;
 
-		Scanner in = new Scanner(System.in);
-		MyStack stack;
 		Maze maze = new Maze();
-		maze.initMaze(4);
+		Maze aux = new Maze();
 
 		System.out.println("Digite o número de linhas para o labirinto: ");
-		size = in.nextInt();
+		sizeRow = in.nextInt();
 
-		// mazeRow = new String[size];
-		stack = new MyStack(size);
-		maze.initArrayMaze(size);
-		
+		System.out.println("Digite o número de colunas para o labirinto: ");
+		sizeCol = in.nextInt();
+
+		initArrayAndStacks(maze, sizeRow, sizeCol);
+		initArrayAndStacks(aux, sizeRow, sizeCol);
+
+		a = initArray(sizeRow, sizeCol);
+
+		fillMaze(a, sizeRow, sizeCol);
+
+		initMaze(maze, a, sizeRow, sizeCol);
+
+		invertePilha(maze, aux, sizeRow, sizeCol);
+
+		printMaze(a, maze, aux, sizeRow, sizeCol);
+
+	}
 
 		for (int i = 0; i < size; i++) {
 			System.out.println("Linha: ");
@@ -65,26 +78,73 @@ public class Start {
 					
 					maze.setElementsArray(linha, cont, maze.getWALL());
 					
+
+	private static void printMaze(String[][] a, Maze maze, Maze aux, int sizeRow, int sizeCol) {
+
+		for (int i = 0; i < sizeRow + 2; i++) {
+			for (int j = 0; j < sizeCol + 2; j++) {
+
+				if (i == 0) {
+					a[i][j] = "1";
+				} else if (i == sizeRow + 1) {
+					a[i][j] = "1";
+				} else {
+					Cell cell = aux.getMazeStack().pop();
+					a[i][j] = maze.getElementMaze(cell.getX(), cell.getY());
 				}
 				
-				Cell cell = new Cell();
-				
-				cell.setX(linha);
-				cell.setY(cont);
-				
-				maze.getMazeStack().push(cell);
-				
-				cont++;
+				System.out.print(a[i][j]);
 			}
-			
-			linha++;
-			
+			System.out.println();
+		}
+	}
+
+	private static void invertePilha(Maze maze, Maze aux, int sizeRow, int sizeCol) {
+
+		for (int i = 0; i < sizeRow * (sizeCol + 2); i++) {
+			aux.getMazeStack().push(maze.getMazeStack().pop());
+		}
+	}
+
+	private static void initMaze(Maze maze, String[][] a, int sizeRow, int sizeCol) {
+
+		for (int i = 0; i < sizeRow; i++) {
+
+			maze.getMazeStack().push(new Cell(i, 0));
+			maze.setElementsArray(i, 0, "1");
+
+			for (int j = 0; j < sizeCol; j++) {
+				maze.getMazeStack().push(new Cell(i, j + 1));
+				maze.setElementsArray(i, j + 1, a[i][j]);
+			}
+
+			maze.getMazeStack().push(new Cell(i, sizeCol + 1));
+			maze.setElementsArray(i, sizeCol + 1, "1");
+
 		}
 
-		// Erro aqui, tentei com set tbm... Ja tentei mudar la na classe
-		// MyStack, mas da erro ao executar
-		// maze.getMazeStack().push(new Cell());
-
-		// maze.getMazeStack().print();
 	}
+
+	private static String[][] initArray(int sizeRow, int sizeCol) {
+		return new String[sizeRow + 2][sizeCol + 2];
+	}
+
+	private static void initArrayAndStacks(Maze maze, int sizeRow, int sizeCol) {
+		maze.initMaze(sizeRow * (sizeCol + 2));
+		maze.initArrayMaze(sizeRow, (sizeCol + 2));
+	}
+
+	private static void fillMaze(String[][] a, int sizeRow, int sizeCol) {
+
+		String rec = "";
+		System.out.println("Informe os valores: \n");
+		
+		for (int i = 0; i < sizeRow; i++) {
+			rec = in.next();
+			rec += "11";
+			a[i] = rec.split("");
+		}
+		
+	}
+
 }

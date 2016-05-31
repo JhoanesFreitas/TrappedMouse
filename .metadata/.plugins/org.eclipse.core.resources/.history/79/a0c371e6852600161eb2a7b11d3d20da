@@ -1,0 +1,93 @@
+package br.com.jho.al.start;
+
+import java.util.Scanner;
+
+import br.com.jho.al.maze.Cell;
+import br.com.jho.al.maze.Maze;
+import br.com.jho.al.stackmanager.MyStack;
+
+public class Start {
+
+	public static void main(String[] args) {
+
+		int sizeRow;
+		int sizeCol;
+		int cont = 0;
+		int linha = 0;
+		// char a = 'p';
+		String mazeRow;
+		String[][] a = null;
+
+		Scanner in = new Scanner(System.in);
+		//MyStack stack;
+		Maze maze = new Maze();
+
+		System.out.println("Digite o número de linhas para o labirinto: ");
+		sizeRow = in.nextInt();
+		
+		System.out.println("Digite o número de linhas para o labirinto: ");
+		sizeCol = in.nextInt();
+		
+		initArrayAndStacks(a, maze, sizeRow, sizeCol);
+		
+		
+		
+
+//		for (int i = 0; i < sizeRow; i++) {
+//			System.out.println("Linha: ");
+//			mazeRow = in.next();
+//
+//			a = mazeRow.split("");
+//
+//			while (cont < a.length) {
+//
+//				if (a[cont].equals(maze.getPASSAGE())) {
+//					
+//					maze.setElementsArray(linha, cont, maze.getPASSAGE());
+//					
+//				} else if (a[cont].equals(maze.getENTRYMARKER())) {
+//					
+//					maze.setElementsArray(linha, cont, maze.getENTRYMARKER());
+//					
+//				} else if (a[cont].equals(maze.getEXITMARKER())) {
+//					
+//					maze.setElementsArray(linha, cont, maze.getEXITMARKER());
+//					
+//				} else if (a[cont].equals(maze.getVISITED())) {
+//					
+//					maze.setElementsArray(linha, cont, maze.getVISITED());
+//					
+//				} else if (a[cont].equals(maze.getWALL())) {
+//					
+//					maze.setElementsArray(linha, cont, maze.getWALL());
+//					
+//				}
+//				
+//				Cell cell = new Cell();
+//				
+//				cell.setX(linha);
+//				cell.setY(cont);
+//				
+//				maze.getMazeStack().push(cell);
+//				
+//				cont++;
+//			}
+//			
+//			linha++;
+//			
+//		}
+
+		// Erro aqui, tentei com set tbm... Ja tentei mudar la na classe
+		// MyStack, mas da erro ao executar
+		// maze.getMazeStack().push(new Cell());
+
+		// maze.getMazeStack().print();
+	}
+	
+	private static void initArrayAndStacks(String[][] a, Maze maze, int sizeRow, int sizeCol){
+		maze.initMaze(sizeRow * sizeCol);
+		maze.initArrayMaze(sizeRow * sizeCol);
+		a = new String[sizeRow][sizeCol];
+	}
+	
+}

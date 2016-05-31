@@ -12,7 +12,7 @@ public class Maze {
 	private final char VISITED = '.';
 	private final char PASSAGE = '0';
 	private final char WALL = '1';
-	private char [][] maze;
+	private String [][] maze;
 	private MyStack<Cell> mazeStack;
 	private MyStack<Cell> backTracking;
 
@@ -20,11 +20,11 @@ public class Maze {
 
 	}
 	
-	public void initArrayMaze(int size){
-		maze = new char[size][size];
+	public void initArrayMaze(int sizeRow, int sizeCol){
+		maze = new String[sizeRow][sizeCol];
 	}
 	
-	public void setElementsArray(int l, int c, char value){
+	public void setElementsArray(int l, int c, String value){
 		maze[l][c] = value;
 	}
 	
@@ -48,7 +48,7 @@ public class Maze {
 		this.exitCell = exitCell;
 	}
 	 
-	public void setMaze(char[][] maze) {
+	public void setMaze(String[][] maze) {
 		this.maze = maze;
 	}
 	
@@ -80,8 +80,12 @@ public class Maze {
 		return EXITMARKER;
 	}
 	
-	public char[][] getMaze() {
+	public String[][] getMaze() {
 		return maze;
+	}
+	
+	public String getElementMaze(int l, int c){
+		return maze[l][c];
 	}
 	
 	public MyStack<Cell> getMazeStack() {
