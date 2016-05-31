@@ -27,6 +27,7 @@ public class Start {
 
 		Maze maze = new Maze();
 		Maze aux = new Maze();
+		Tracking track = new Tracking();
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -62,6 +63,8 @@ public class Start {
 			invertePilha(maze, aux, sizeRow, sizeCol);
 
 			printMaze(a, maze, aux, sizeRow, sizeCol);
+			
+			track.trackBack(a, sizeRow, sizeCol);
 		}else
 			System.out.println(INFONOTFOUND);
 
