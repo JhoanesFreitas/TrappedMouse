@@ -64,7 +64,10 @@ public class Start {
 
 			printMaze(a, maze, aux, sizeRow, sizeCol);
 			
+<<<<<<< HEAD
+=======
 			track.trackBack(a, sizeRow, sizeCol);
+>>>>>>> db86d2df2f58d8da5025506067ce4e9dd0d982e3
 		}else
 			System.out.println(INFONOTFOUND);
 
