@@ -62,7 +62,6 @@ public class Start {
 			invertePilha(maze, aux, sizeRow, sizeCol);
 
 			printMaze(a, maze, aux, sizeRow, sizeCol);
-			
 		}else
 			System.out.println(INFONOTFOUND);
 
