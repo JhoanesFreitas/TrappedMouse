@@ -1,10 +1,13 @@
 package br.com.jho.al.start;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import br.com.jho.al.maze.Cell;
 import br.com.jho.al.maze.Maze;
-import br.com.jho.al.stackmanager.MyStack;
 
 public class Start {
 
@@ -12,28 +15,42 @@ public class Start {
 
 	public static void main(String[] args) {
 
-		int sizeRow;
-		int sizeCol;
+		int sizeRow = 0;
+		int sizeCol = 0;
 		int cont = 0;
 		int linha = 0;
-		String mazeRow;
-		String[][] a = null;
+		String mazeRow = "p";
+		String[][] a;
+		ArrayList<String> array = new ArrayList<>();
 
 		Maze maze = new Maze();
 		Maze aux = new Maze();
 
-		System.out.println("Digite o número de linhas para o labirinto: ");
-		sizeRow = in.nextInt();
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		System.out.println("Digite o número de colunas para o labirinto: ");
-		sizeCol = in.nextInt();
+		try {
+
+			while (mazeRow.length() != 0) {
+				
+				mazeRow = br.readLine();
+				
+				if (mazeRow.length() != 0)
+					array.add(mazeRow);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		sizeRow = array.size();
+		sizeCol = array.get(0).length();
 
 		initArrayAndStacks(maze, sizeRow, sizeCol);
 		initArrayAndStacks(aux, sizeRow, sizeCol);
 
 		a = initArray(sizeRow, sizeCol);
 
-		fillMaze(a, sizeRow, sizeCol);
+		fillMaze(a, array, sizeRow, sizeCol);
 
 		initMaze(maze, a, sizeRow, sizeCol);
 
@@ -56,7 +73,7 @@ public class Start {
 					Cell cell = aux.getMazeStack().pop();
 					a[i][j] = maze.getElementMaze(cell.getX(), cell.getY());
 				}
-				
+
 				System.out.print(a[i][j]);
 			}
 			System.out.println();
@@ -98,17 +115,17 @@ public class Start {
 		maze.initArrayMaze(sizeRow, (sizeCol + 2));
 	}
 
-	private static void fillMaze(String[][] a, int sizeRow, int sizeCol) {
+	private static void fillMaze(String[][] a, ArrayList<String> array, int sizeRow, int sizeCol) {
 
 		String rec = "";
 		System.out.println("Informe os valores: \n");
-		
+
 		for (int i = 0; i < sizeRow; i++) {
-			rec = in.next();
+			rec = array.get(i);
 			rec += "11";
 			a[i] = rec.split("");
 		}
-		
+
 	}
 
 }
