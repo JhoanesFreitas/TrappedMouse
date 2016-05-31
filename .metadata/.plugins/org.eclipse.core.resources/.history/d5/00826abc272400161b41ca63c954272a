@@ -32,13 +32,6 @@ public class Start {
 
 		for (int i = 0; i < size; i++) {
 			System.out.println("Linha: ");
-
-			//row = in.next();
-			
-			//Erro aqui, tentei com set tbm... Ja tentei mudar la na classe
-			//MyStack, mas da erro ao executar
-			//maze.getMazeStack().push(row);
-
 			mazeRow = in.next();
 
 			a = mazeRow.split("");
@@ -51,34 +44,25 @@ public class Start {
 					
 				} else if (a[cont].equals(maze.getENTRYMARKER())) {
 					
-					maze.setElementsArray(linha, cont, maze.getENTRYMARKER());
+					maze.setElementsArray(linha, cont, maze.getPASSAGE());
 					
 				} else if (a[cont].equals(maze.getEXITMARKER())) {
 					
-					maze.setElementsArray(linha, cont, maze.getEXITMARKER());
+					maze.setElementsArray(linha, cont, maze.getPASSAGE());
 					
 				} else if (a[cont].equals(maze.getVISITED())) {
 					
-					maze.setElementsArray(linha, cont, maze.getVISITED());
+					maze.setElementsArray(linha, cont, maze.getPASSAGE());
 					
 				} else if (a[cont].equals(maze.getWALL())) {
 					
-					maze.setElementsArray(linha, cont, maze.getWALL());
+					maze.setElementsArray(linha, cont, maze.getPASSAGE());
 					
 				}
 				
-				Cell cell = new Cell();
-				
-				cell.setX(linha);
-				cell.setY(cont);
-				
-				maze.getMazeStack().push(cell);
-				
 				cont++;
 			}
-			
 			linha++;
-			
 		}
 
 		// Erro aqui, tentei com set tbm... Ja tentei mudar la na classe

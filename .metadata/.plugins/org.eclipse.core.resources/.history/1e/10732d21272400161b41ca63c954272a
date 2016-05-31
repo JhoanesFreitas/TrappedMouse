@@ -21,11 +21,7 @@ public class Maze {
 	}
 	
 	public void initArrayMaze(int size){
-		maze = new char[size][size];
-	}
-	
-	public void setElementsArray(int l, int c, char value){
-		maze[l][c] = value;
+		maze[][] = new char[size][size];
 	}
 	
 	public void initMaze(int size){
