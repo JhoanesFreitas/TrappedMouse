@@ -28,8 +28,6 @@ public class Start {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		System.out.println("Informe os valores: \t - Enter duas vezes para terminar\n");
-		
 		try {
 
 			while (mazeRow.length() != 0) {
@@ -120,6 +118,7 @@ public class Start {
 	private static void fillMaze(String[][] a, ArrayList<String> array, int sizeRow, int sizeCol) {
 
 		String rec = "";
+		System.out.println("Informe os valores: \n");
 
 		for (int i = 0; i < sizeRow; i++) {
 			rec = array.get(i);

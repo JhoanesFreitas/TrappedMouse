@@ -28,8 +28,6 @@ public class Start {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		System.out.println("Informe os valores: \t - Enter duas vezes para terminar\n");
-		
 		try {
 
 			while (mazeRow.length() != 0) {
