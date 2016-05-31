@@ -58,7 +58,7 @@ public class Start {
 
 		printMaze(a, maze, aux, sizeRow, sizeCol);
 
-	}
+	}				
 
 	private static void printMaze(String[][] a, Maze maze, Maze aux, int sizeRow, int sizeCol) {
 
