@@ -12,8 +12,6 @@ import br.com.jho.al.maze.Maze;
 public class Start {
 
 	private static Scanner in = new Scanner(System.in);
-	private static final String INFOINPUT = "Informe os valores: \t - Enter duas vezes para terminar\n";
-	private static final String INFONOTFOUND = "Nenhum valor informado!";
 
 	public static void main(String[] args) {
 
@@ -30,7 +28,7 @@ public class Start {
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		System.out.println(INFOINPUT);
+		System.out.println("Informe os valores: \t - Enter duas vezes para terminar\n");
 
 		try {
 
@@ -63,7 +61,7 @@ public class Start {
 
 			printMaze(a, maze, aux, sizeRow, sizeCol);
 		}else
-			System.out.println(INFONOTFOUND);
+			System.out.println("Nenhum valor informado!");
 
 	}
 
