@@ -1,7 +1,0 @@
-package br.com.jho.al.maze;
-
-public class Cell {
-	
-	private int x;
-	private int y;
-}
