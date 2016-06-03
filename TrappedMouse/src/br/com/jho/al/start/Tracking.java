@@ -12,7 +12,7 @@ public class Tracking {
         this.maze = maze;
     }
 
-    public void trackBack(Cell cell) {
+    public void backTrack(Cell cell) {
 
         //maze.setBackTracking(new MyStack<Cell>(
         //      maze.getSizeRow() * (maze.getSizeRow() + 2)));
