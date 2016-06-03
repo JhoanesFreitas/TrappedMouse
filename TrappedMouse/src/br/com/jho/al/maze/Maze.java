@@ -22,8 +22,8 @@ public class Maze {
     private final char PASSAGE = '0';
     private final char WALL = '1';
     private char[][] maze;
-    private MyStack<String> mazeStack;
-    private MyStack<Cell> backTracking;
+    private MyStack<String> mazeRows;
+    private MyStack<Cell> mazeStack;
 
     private int sizeRow = 0;
     private int sizeCol = 0;
@@ -33,6 +33,7 @@ public class Maze {
     private int value = -1;
     private BufferedReader br;
 
+    
     public void execute() {
         menu();
     }
@@ -56,8 +57,6 @@ public class Maze {
             tratment(value);
 
         }
-
-        return;
     }
 
     private void tratment(int v) {
@@ -107,22 +106,24 @@ public class Maze {
         System.out.println("Início...\t" + getCurrentCell().getX()
                 + getCurrentCell().getY());
 
+        mazeStack = new MyStack<>(maze.length);
+        
         try {
             while (!getCurrentCell().equals(getExitCell())) {
 
                 maze[getCurrentCell().getX()][getCurrentCell().getY()] = getVISITED();
                 track.trackBack(getCurrentCell());
 
-                if (getBackTracking().isEmpty()) {
+                if (getMazeStack().isEmpty()) {
                     System.out.println("Caminho não encontrado!");
                     break;
                 } else {
-                    setCurrentCell(getBackTracking().pop());
+                    setCurrentCell(getMazeStack().pop());
                 }
                 System.out.println("Caminhando...\t" + getCurrentCell().getX()
                         + getCurrentCell().getY());
                 
-                System.out.println(getBackTracking().size());
+                System.out.println(getMazeStack().size());
             }
 
             if (getCurrentCell().equals(getExitCell())) {
@@ -164,7 +165,7 @@ public class Maze {
 
         fillStackMaze();
 
-        invertePilha(mazeStack, sizeRow, sizeCol);
+        invertePilha(mazeRows, sizeRow, sizeCol);
 
         refillMaze();
     }
@@ -188,7 +189,7 @@ public class Maze {
 
     private void fillStackMaze() {
         for (int i = 0; i < sizeRow; i++) {
-            mazeStack.push(String.valueOf(maze[i]));
+            mazeRows.push(String.valueOf(maze[i]));
         }
     }
 
@@ -205,7 +206,7 @@ public class Maze {
                     maze[i][j] = '1';
                 } else {
                     if (j == 0) {
-                        rec = mazeStack.pop();
+                        rec = mazeRows.pop();
                     }
                     maze[i][j] = rec.charAt(j);
                 }
@@ -236,10 +237,6 @@ public class Maze {
 
     }
 
-    private void initArrayAndStacks(Maze maze, int sizeRow, int sizeCol) {
-        maze.initMaze(sizeRow * (sizeCol + 2));
-    }
-
     private char[][] initArray(int sizeRow, int sizeCol) {
         return new char[sizeRow + 2][sizeCol + 2];
     }
@@ -253,7 +250,7 @@ public class Maze {
     }
 
     public void initMaze(int size) {
-        mazeStack = new MyStack<>(size);
+        mazeRows = new MyStack<>(size);
     }
 
     public void setSizeRow(int value) {
@@ -262,10 +259,6 @@ public class Maze {
 
     public void setSizeCol(int value) {
         this.sizeCol = value;
-    }
-
-    public void setBackTracking(MyStack<Cell> backTracking) {
-        this.backTracking = backTracking;
     }
 
     public void setCurrentCell(Cell currentCell) {
@@ -284,7 +277,7 @@ public class Maze {
         this.maze = maze;
     }
 
-    public void setMazeStack(MyStack<String> mazeStack) {
+    public void setMazeStack(MyStack<Cell> mazeStack) {
         this.mazeStack = mazeStack;
     }
 
@@ -294,10 +287,6 @@ public class Maze {
 
     public int getSizeCol() {
         return sizeCol;
-    }
-
-    public MyStack<Cell> getBackTracking() {
-        return backTracking;
     }
 
     public Cell getCurrentCell() {
@@ -328,8 +317,16 @@ public class Maze {
         return maze[l][c];
     }
 
-    public MyStack<String> getMazeStack() {
+    public MyStack<Cell> getMazeStack() {
         return mazeStack;
+    }
+
+    public MyStack<String> getMazeRows() {
+        return mazeRows;
+    }
+
+    public void setMazeRows(MyStack<String> mazeRows) {
+        this.mazeRows = mazeRows;
     }
 
     public char getPASSAGE() {
