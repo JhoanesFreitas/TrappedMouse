@@ -108,6 +108,7 @@ public class Maze {
                 + getCurrentCell().getY());
 
         try {
+
             while (!getCurrentCell().equals(getExitCell())) {
 
                 maze[getCurrentCell().getX()][getCurrentCell().getY()] = getVISITED();
@@ -209,29 +210,25 @@ public class Maze {
                     }
                     maze[i][j] = rec.charAt(j);
                 }
-
-                //System.out.print(maze[i][j]);
             }
-            //System.out.println();
         }
     }
 
-    private static void invertePilha(MyStack<String> maze, int sizeRow, int sizeCol) {
+    private void invertePilha(MyStack<String> maze, int sizeRow, int sizeCol) {
 
-        MyStack<String> aux = new MyStack<>(sizeRow * (sizeCol + 2));
+        MyStack<String> aux;
+        MyStack<String> m;
 
-        for (int i = 0; i < sizeRow; i++) {
-            aux.push(maze.pop());
-        }
+        if (maze != null) {
+           
+            aux = new MyStack<>(this.maze.length);
+            m = new MyStack<>(this.maze.length);
 
-        MyStack<String> m = new MyStack<>(sizeRow * (sizeCol + 2));
+            for (int i = 0; i < sizeRow; i++){ aux.push(maze.pop()); }
 
-        for (int i = 0; i < sizeRow; i++) {
-            m.push(aux.pop());
-        }
+            for (int i = 0; i < sizeRow; i++){ m.push(aux.pop()); }
 
-        for (int i = 0; i < sizeRow; i++) {
-            maze.push(m.pop());
+            for (int i = 0; i < sizeRow; i++){ maze.push(m.pop()); }
         }
 
     }
