@@ -2,43 +2,58 @@ package br.com.jho.al.start;
 
 import br.com.jho.al.maze.Cell;
 import br.com.jho.al.maze.Maze;
+import br.com.jho.al.stackmanager.MyStack;
 
 public class Tracking {
 
-	private Maze maze;
+    private Maze maze;
 
-	public Tracking(Maze maze, int sizeRow, int sizeCol) {
-		this.maze = maze;
-	}
+    public Tracking(Maze maze) {
+        this.maze = maze;
+    }
 
-	public void execute(){
-		
-	}
-	
-	public void trackBack(String[][] a, int sizeRow, int sizeCol) {
+    public void trackBack(Cell cell) {
 
-		validate(sizeRow, sizeCol, String.valueOf(maze.getENTRYMARKER()));
-		
-		for (int i = 0; i < sizeRow; i++) {
-			for (int j = 0; j < sizeCol; j++) {
-				if (a[i][j] == String.valueOf(maze.getENTRYMARKER())) {
+        maze.setBackTracking(new MyStack<Cell>(
+                maze.getSizeRow() * (maze.getSizeRow() + 2)));
+        
+        try {
+            if (isValue(cell.getX() - 1, cell.getY(), maze.getPASSAGE(), maze.getEXITMARKER())) {
+                maze.getBackTracking().push(new Cell(cell.getX() - 1, cell.getY()));
+            }
+        } catch (NullPointerException e) {
+            
+        }
 
-					maze.getBackTracking().push(new Cell(i, j));
+        try {
+            if (isValue(cell.getX() + 1, cell.getY(), maze.getPASSAGE(), maze.getEXITMARKER())) {
+                maze.getBackTracking().push(new Cell(cell.getX() + 1, cell.getY()));
+            }
+        } catch (NullPointerException e) {
 
-				}
-			}
-		}
-	}
+        }
 
-	private boolean validate(int sizeRow, int sizeCol, String search) {
-		for (int i = 0; i < sizeRow; i++) {
-			for (int j = 0; j < sizeCol; j++) {
-//				if (maze.getElementMaze(i, j).equals(search)) {
-//					return true;
-//				}
-			}
-		}
-		return false;
-	}
+        try {
+            if (isValue(cell.getX(), cell.getY() - 1, maze.getPASSAGE(), maze.getEXITMARKER())) {
+                maze.getBackTracking().push(new Cell(cell.getX(), cell.getY() - 1));
+            }
+        } catch (NullPointerException e) {
+
+        }
+
+        try {
+            if (isValue(cell.getX(), cell.getY() + 1, maze.getPASSAGE(), maze.getEXITMARKER())) {
+                maze.getBackTracking().push(new Cell(cell.getX(), cell.getY() + 1));
+            }
+        } catch (NullPointerException e) {
+
+        }
+        
+        //System.out.println(maze.getBackTracking().isFull());
+    }
+    
+    private boolean isValue(int i, int j, char cmp1, char cmp2){
+        return ((maze.getElementMaze(i, j) == cmp1) || (maze.getElementMaze(i, j) == cmp2));
+    }
 
 }

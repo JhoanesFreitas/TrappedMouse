@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 import br.com.jho.al.constants.Constants;
 import br.com.jho.al.stackmanager.MyStack;
+import br.com.jho.al.start.Tracking;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Maze {
 
@@ -25,16 +28,116 @@ public class Maze {
     private int sizeRow = 0;
     private int sizeCol = 0;
     private String mazeRow = "p";
-    ArrayList<String> array = new ArrayList<>();
+    private ArrayList<String> array = new ArrayList<>();
+
+    private int value = -1;
+    private BufferedReader br;
 
     public void execute() {
-        buildStack();
+        menu();
+    }
+
+    private void menu() {
+
+        br = new BufferedReader(new InputStreamReader(System.in));
+
+        while (value != 0) {
+            System.out.println(Constants.INFOINITMENU);
+            System.out.println(Constants.MENU1);
+            System.out.println(Constants.MENU2);
+            System.out.println(Constants.EXIT);
+
+            try {
+                value = Integer.valueOf(br.readLine());
+            } catch (IOException ex) {
+                Logger.getLogger(Maze.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            tratment(value);
+
+        }
+
+        return;
+    }
+
+    private void tratment(int v) {
+
+        switch (v) {
+            case 1:
+                buildStack();
+                break;
+            case 2:
+                exitMaze();
+                break;
+            case 0:
+                break;
+            default:
+                System.out.println("Valor inválido!");
+                break;
+        }
+
+    }
+
+    private void exitMaze() {
+        findValues();
+        trackBack();
+    }
+
+    private void findValues() {
+        for (int i = 0; i < sizeRow + 2; i++) {
+            for (int j = 0; j < sizeCol + 2; j++) {
+                if (maze[i][j] == getENTRYMARKER()) {
+                    setEntryCell(createCell(i, j));
+                    setCurrentCell(createCell(i, j));
+                } else if (maze[i][j] == getEXITMARKER()) {
+                    setExitCell(createCell(i, j));
+                }
+            }
+        }
+    }
+
+    private Cell createCell(int i, int j) {
+        return new Cell(i, j);
+    }
+
+    private void trackBack() {
+
+        Tracking track = new Tracking(this);
+
+        System.out.println("Início...\t" + getCurrentCell().getX()
+                + getCurrentCell().getY());
+
+        try {
+            while (!getCurrentCell().equals(getExitCell())) {
+
+                maze[getCurrentCell().getX()][getCurrentCell().getY()] = getVISITED();
+                track.trackBack(getCurrentCell());
+
+                if (getBackTracking().isEmpty()) {
+                    System.out.println("Caminho não encontrado!");
+                    break;
+                } else {
+                    setCurrentCell(getBackTracking().pop());
+                }
+                System.out.println("Caminhando...\t" + getCurrentCell().getX()
+                        + getCurrentCell().getY());
+                
+                System.out.println(getBackTracking().size());
+            }
+
+            if (getCurrentCell().equals(getExitCell())) {
+                System.out.println("Saiu!");
+            }
+
+        } catch (NullPointerException e) {
+            System.out.println("Sem saída! \n" + e.getMessage() + "\n"
+                    + e.toString() + "\n" + e.getCause());
+        }
     }
 
     private void buildStack() {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.println(Constants.INFOINPUT);
 
         try {
@@ -60,11 +163,9 @@ public class Maze {
         fillMaze(array, sizeRow, sizeCol);
 
         fillStackMaze();
-        
-        //aux.initMaze();
-        
+
         invertePilha(mazeStack, sizeRow, sizeCol);
-        
+
         refillMaze();
     }
 
@@ -109,42 +210,38 @@ public class Maze {
                     maze[i][j] = rec.charAt(j);
                 }
 
-                System.out.print(maze[i][j]);
+                //System.out.print(maze[i][j]);
             }
-            System.out.println();
+            //System.out.println();
         }
     }
 
     private static void invertePilha(MyStack<String> maze, int sizeRow, int sizeCol) {
-        
+
         MyStack<String> aux = new MyStack<>(sizeRow * (sizeCol + 2));
-        
+
         for (int i = 0; i < sizeRow; i++) {
             aux.push(maze.pop());
         }
-        
+
         MyStack<String> m = new MyStack<>(sizeRow * (sizeCol + 2));
-        
+
         for (int i = 0; i < sizeRow; i++) {
             m.push(aux.pop());
         }
-        
+
         for (int i = 0; i < sizeRow; i++) {
             maze.push(m.pop());
         }
-        
+
     }
-    
+
     private void initArrayAndStacks(Maze maze, int sizeRow, int sizeCol) {
         maze.initMaze(sizeRow * (sizeCol + 2));
     }
 
     private char[][] initArray(int sizeRow, int sizeCol) {
         return new char[sizeRow + 2][sizeCol + 2];
-    }
-
-    public void exitMaze() {
-
     }
 
     public void initArrayMaze(int sizeRow, int sizeCol) {
@@ -157,6 +254,14 @@ public class Maze {
 
     public void initMaze(int size) {
         mazeStack = new MyStack<>(size);
+    }
+
+    public void setSizeRow(int value) {
+        this.sizeRow = value;
+    }
+
+    public void setSizeCol(int value) {
+        this.sizeCol = value;
     }
 
     public void setBackTracking(MyStack<Cell> backTracking) {
@@ -181,6 +286,14 @@ public class Maze {
 
     public void setMazeStack(MyStack<String> mazeStack) {
         this.mazeStack = mazeStack;
+    }
+
+    public int getSizeRow() {
+        return sizeRow;
+    }
+
+    public int getSizeCol() {
+        return sizeCol;
     }
 
     public MyStack<Cell> getBackTracking() {
