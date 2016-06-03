@@ -30,7 +30,9 @@ public class MyStack<T> {
     public void push(T element) {
 
         if (position < mazeStack.length) {
+            //position++;
             mazeStack[++position] = element;
+
             System.out.println("Pos push: \t" + position);
         } else {
             System.out.println("Overflow");
@@ -43,9 +45,9 @@ public class MyStack<T> {
         T recValue;
 
         if (!isEmpty()) {
-            recValue = mazeStack[position];
-            position--;
-            System.out.println("Pos pop: \t" + position);
+            recValue = mazeStack[position--];
+            System
+            .out.println("Pos pop: \t" + position);
         } else {
             throw new StackOverflowError("Stack Underflow");
         }

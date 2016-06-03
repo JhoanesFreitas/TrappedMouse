@@ -14,46 +14,26 @@ public class Tracking {
 
     public void trackBack(Cell cell) {
 
-        maze.setBackTracking(new MyStack<Cell>(
-                maze.getSizeRow() * (maze.getSizeRow() + 2)));
+        //maze.setBackTracking(new MyStack<Cell>(
+        //      maze.getSizeRow() * (maze.getSizeRow() + 2)));
         
-        try {
-            if (isValue(cell.getY(), cell.getX() - 1, maze.getPASSAGE(), maze.getEXITMARKER())) {
-                maze.getBackTracking().push(new Cell(cell.getX(), cell.getY() - 1));
-            }
-        } catch (NullPointerException e) {
-            
+        if (isValue(cell.getX() - 1, cell.getY(), maze.getPASSAGE(), maze.getEXITMARKER())) {
+            maze.getMazeStack().push(new Cell(cell.getX() - 1, cell.getY()));
+        }
+        if (isValue(cell.getX() + 1, cell.getY(), maze.getPASSAGE(), maze.getEXITMARKER())) {
+            maze.getMazeStack().push(new Cell(cell.getX() + 1, cell.getY()));
+        }
+        if (isValue(cell.getX(), cell.getY() - 1, maze.getPASSAGE(), maze.getEXITMARKER())) {
+            maze.getMazeStack().push(new Cell(cell.getX(), cell.getY() - 1));
+        }
+        if (isValue(cell.getX(), cell.getY() + 1, maze.getPASSAGE(), maze.getEXITMARKER())) {
+            maze.getMazeStack().push(new Cell(cell.getX(), cell.getY() + 1));
         }
 
-        try {
-            if (isValue(cell.getY(), cell.getX() + 1, maze.getPASSAGE(), maze.getEXITMARKER())) {
-                maze.getBackTracking().push(new Cell(cell.getX(), cell.getY() + 1));
-            }
-        } catch (NullPointerException e) {
-
-        }
-
-        try {
-            if (isValue(cell.getY() - 1, cell.getX(), maze.getPASSAGE(), maze.getEXITMARKER())) {
-                maze.getBackTracking().push(new Cell(cell.getX() - 1, cell.getY()));
-            }
-        } catch (NullPointerException e) {
-
-        }
-
-        try {
-            if (isValue(cell.getY() + 1, cell.getX(), maze.getPASSAGE(), maze.getEXITMARKER())) {
-                maze.getBackTracking().push(new Cell(cell.getX() + 1, cell.getY()));
-            }
-        } catch (NullPointerException e) {
-
-        }
-        
         //System.out.println(maze.getBackTracking().isFull());
     }
-    
-    private boolean isValue(int j, int i, char cmp1, char cmp2){
+
+    private boolean isValue(int i, int j, char cmp1, char cmp2) {
         return ((maze.getElementMaze(i, j) == cmp1) || (maze.getElementMaze(i, j) == cmp2));
     }
-
 }
