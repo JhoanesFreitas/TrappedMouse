@@ -1,0 +1,9 @@
+package br.com.jho.al.constants;
+
+
+public class Constants {
+
+	private static final String INFOINPUT = "Informe os valores: \t - Enter duas vezes para terminar\n";
+	private static final String INFONOTFOUND = "Nenhum valor informado!";
+	
+}
