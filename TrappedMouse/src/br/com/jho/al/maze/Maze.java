@@ -27,13 +27,14 @@ public class Maze {
 
     private int sizeRow = 0;
     private int sizeCol = 0;
-    private String mazeRow = "p";
+    private boolean existMouse = false;
+    private boolean existExit = false;
+    private String mazeCmpAux = "p";
     private ArrayList<String> array = new ArrayList<>();
 
     private int value = -1;
     private BufferedReader br;
 
-    
     public void execute() {
         menu();
     }
@@ -53,7 +54,7 @@ public class Maze {
             } catch (IOException ex) {
                 Logger.getLogger(Maze.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             tratment(value);
         }
     }
@@ -68,30 +69,49 @@ public class Maze {
                 exitMaze();
                 break;
             case 0:
-                System.out.println("Tchau!");
+                print(Constants.BYE);
                 break;
             default:
-                System.out.println("Valor inválido!");
+                print(Constants.NOTVALUE);
                 break;
         }
 
     }
 
     private void exitMaze() {
-        findValues();
-        backTrack();
+        try {
+            findValues();
+            backTrack();
+        } catch (Exception e) {
+            if (e.getCause() == null) {
+                print(Constants.EXCEPTION);
+            }
+        }
     }
 
-    private void findValues() {
-        for (int i = 0; i < sizeRow + 2; i++) {
-            for (int j = 0; j < sizeCol + 2; j++) {
-                if (maze[i][j] == getENTRYMARKER()) {
+    private void findValues() throws Exception{
+        
+        for (int i = 0; i < sizeRow + 2; i++){
+            
+            for (int j = 0; j < sizeCol + 2; j++){
+                
+                if (maze[i][j] == getENTRYMARKER()){
+                    
                     setEntryCell(createCell(i, j));
                     setCurrentCell(createCell(i, j));
-                } else if (maze[i][j] == getEXITMARKER()) {
+                    setExistMouse(!isExistMouse());
+                    
+                }else if(maze[i][j] == getEXITMARKER()){
+                    
                     setExitCell(createCell(i, j));
+                    setExistExit(!isExistExit());
+                    
                 }
             }
+        }
+
+        if (!isExistExit() || !isExistMouse()){
+            throw new Exception("Nulo");
         }
     }
 
@@ -103,53 +123,42 @@ public class Maze {
 
         Tracking track = new Tracking(this);
 
-        System.out.println("Início...\t" + getCurrentCell().getX()
-                + getCurrentCell().getY());
-
+        System.out.println("Início...\t" + getCurrentCell().getY()
+                + getCurrentCell().getX());
         mazeStack = new MyStack<>(maze.length);
-        
-        try {
 
-            while (!getCurrentCell().equals(getExitCell())) {
+        while (!getCurrentCell().equals(getExitCell())) {
 
-                maze[getCurrentCell().getX()][getCurrentCell().getY()] = getVISITED();
-                track.backTrack(getCurrentCell());
+            maze[getCurrentCell().getY()][getCurrentCell().getX()] = getVISITED();
+            track.backTrack(getCurrentCell());
 
-                if (getMazeStack().isEmpty()) {
-                    System.out.println("Caminho não encontrado!");
-                    break;
-                } else {
-                    setCurrentCell(getMazeStack().pop());
-                }
-                System.out.println("Caminhando...\t" + getCurrentCell().getX()
-                        + getCurrentCell().getY());
-                
-                System.out.println(getMazeStack().size());
+            if (getMazeStack().isEmpty()) {
+                print(Constants.WAYNOTFOUND);
+                break;
+            } else {
+                setCurrentCell(getMazeStack().pop());
             }
+            System.out.println("Caminhando...\t" + getCurrentCell().getY()
+                    + getCurrentCell().getX());
+        }
 
-            if (getCurrentCell().equals(getExitCell())) {
-                System.out.println("Saiu!");
-            }
-
-        } catch (NullPointerException e) {
-            System.out.println("Sem saída! \n" + e.getMessage() + "\n"
-                    + e.toString() + "\n" + e.getCause());
+        if (getCurrentCell().equals(getExitCell())) {
+            System.out.println("Saiu!");
         }
     }
 
     private void buildStack() {
 
-        //BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println(Constants.INFOINPUT);
+        print(Constants.INFOINPUT);
 
         try {
 
-            while (mazeRow.length() != 0) {
+            while (mazeCmpAux.length() != 0) {
 
-                mazeRow = br.readLine();
+                mazeCmpAux = br.readLine();
 
-                if (mazeRow.length() != 0) {
-                    array.add(mazeRow);
+                if (mazeCmpAux.length() != 0) {
+                    array.add(mazeCmpAux);
                 }
             }
 
@@ -157,18 +166,30 @@ public class Maze {
             e.printStackTrace();
         }
 
-        sizeRow = array.size();
-        sizeCol = array.get(0).length();
+        if (!getArray().isEmpty()) {
 
-        maze = initArray(sizeRow, sizeCol);
-        initMaze(sizeRow * (sizeCol + 2));
-        fillMaze(array, sizeRow, sizeCol);
+            setSizeRow(array.size());
+            setSizeCol(getArray().get(0).length());
 
-        fillStackMaze();
+            maze = initArray(getSizeRow(), getSizeCol());
+            initMaze(getMaze().length);
+            fillMaze(getArray(), getSizeRow(), getSizeCol());
 
-        invertePilha(mazeRows, sizeRow, sizeCol);
+            fillStackMaze();
 
-        refillMaze();
+            invertePilha(getMazeRows(), getSizeRow(), getSizeCol());
+
+            refillMaze();
+
+        } else {
+            array.clear();
+            mazeCmpAux = "p";
+            print(Constants.NULL);
+        }
+    }
+
+    private void print(String msg) {
+        System.out.println(msg);
     }
 
     private void fillMaze(ArrayList<String> array, int sizeRow, int sizeCol) {
@@ -181,7 +202,6 @@ public class Maze {
 
             for (int j = 0; j < sizeCol; j++) {
                 maze[i][j + 1] = rec.charAt(j);
-                //System.out.print(maze[i][j+1]);
             }
 
             maze[i][sizeCol + 1] = '1';
@@ -221,15 +241,21 @@ public class Maze {
         MyStack<String> m;
 
         if (maze != null) {
-           
+
             aux = new MyStack<>(this.maze.length);
             m = new MyStack<>(this.maze.length);
 
-            for (int i = 0; i < sizeRow; i++){ aux.push(maze.pop()); }
+            for (int i = 0; i < sizeRow; i++) {
+                aux.push(maze.pop());
+            }
 
-            for (int i = 0; i < sizeRow; i++){ m.push(aux.pop()); }
+            for (int i = 0; i < sizeRow; i++) {
+                m.push(aux.pop());
+            }
 
-            for (int i = 0; i < sizeRow; i++){ maze.push(m.pop()); }
+            for (int i = 0; i < sizeRow; i++) {
+                maze.push(m.pop());
+            }
         }
 
     }
@@ -250,12 +276,32 @@ public class Maze {
         mazeRows = new MyStack<>(size);
     }
 
+    public boolean isExistMouse() {
+        return existMouse;
+    }
+
+    public void setExistMouse(boolean existMouse) {
+        this.existMouse = existMouse;
+    }
+
+    public boolean isExistExit() {
+        return existExit;
+    }
+
+    public void setExistExit(boolean existExit) {
+        this.existExit = existExit;
+    }
+
     public void setSizeRow(int value) {
         this.sizeRow = value;
     }
 
     public void setSizeCol(int value) {
         this.sizeCol = value;
+    }
+
+    public void setArray(ArrayList<String> array) {
+        this.array = array;
     }
 
     public void setCurrentCell(Cell currentCell) {
@@ -276,6 +322,10 @@ public class Maze {
 
     public void setMazeStack(MyStack<Cell> mazeStack) {
         this.mazeStack = mazeStack;
+    }
+
+    public ArrayList<String> getArray() {
+        return array;
     }
 
     public int getSizeRow() {

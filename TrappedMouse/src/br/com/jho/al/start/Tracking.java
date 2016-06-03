@@ -2,7 +2,6 @@ package br.com.jho.al.start;
 
 import br.com.jho.al.maze.Cell;
 import br.com.jho.al.maze.Maze;
-import br.com.jho.al.stackmanager.MyStack;
 
 public class Tracking {
 
@@ -14,26 +13,21 @@ public class Tracking {
 
     public void backTrack(Cell cell) {
 
-        //maze.setBackTracking(new MyStack<Cell>(
-        //      maze.getSizeRow() * (maze.getSizeRow() + 2)));
-        
-        if (isValue(cell.getX() - 1, cell.getY(), maze.getPASSAGE(), maze.getEXITMARKER())) {
-            maze.getMazeStack().push(new Cell(cell.getX() - 1, cell.getY()));
-        }
-        if (isValue(cell.getX() + 1, cell.getY(), maze.getPASSAGE(), maze.getEXITMARKER())) {
-            maze.getMazeStack().push(new Cell(cell.getX() + 1, cell.getY()));
-        }
         if (isValue(cell.getX(), cell.getY() - 1, maze.getPASSAGE(), maze.getEXITMARKER())) {
-            maze.getMazeStack().push(new Cell(cell.getX(), cell.getY() - 1));
+            maze.getMazeStack().push(new Cell(cell.getY() - 1, cell.getX()));
         }
         if (isValue(cell.getX(), cell.getY() + 1, maze.getPASSAGE(), maze.getEXITMARKER())) {
-            maze.getMazeStack().push(new Cell(cell.getX(), cell.getY() + 1));
+            maze.getMazeStack().push(new Cell(cell.getY() + 1, cell.getX()));
         }
-
-        //System.out.println(maze.getBackTracking().isFull());
+        if (isValue(cell.getX() - 1, cell.getY(), maze.getPASSAGE(), maze.getEXITMARKER())) {
+            maze.getMazeStack().push(new Cell(cell.getY(), cell.getX() - 1));
+        }
+        if (isValue(cell.getX() + 1, cell.getY(), maze.getPASSAGE(), maze.getEXITMARKER())) {
+            maze.getMazeStack().push(new Cell(cell.getY(), cell.getX() + 1));
+        }
     }
 
-    private boolean isValue(int i, int j, char cmp1, char cmp2) {
+    private boolean isValue(int j, int i, char cmp1, char cmp2) {
         return ((maze.getElementMaze(i, j) == cmp1) || (maze.getElementMaze(i, j) == cmp2));
     }
 }

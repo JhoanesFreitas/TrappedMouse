@@ -9,9 +9,9 @@ public class Cell {
         // TODO Auto-generated constructor stub
     }
 
-    public Cell(int x, int y) {
-        setX(x);
+    public Cell(int y, int x) {
         setY(y);
+        setX(x);
     }
 
     public boolean equals(Cell cell) {

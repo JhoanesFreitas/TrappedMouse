@@ -8,5 +8,10 @@ public class Constants {
     public static final String MENU1 = "1\tCriar labirinto";
     public static final String MENU2 = "2\tPlay";
     public static final String EXIT = "0\tSair";
+    public static final String NULL = "Operação inválida!";
+    public static final String NOTVALUE = "Valor inválido!";
+    public static final String EXCEPTION = "Sem saída ou sem o rato!";
+    public static final String WAYNOTFOUND = "Caminho não encontrado!";
+    public static final String BYE = "Tchau!";
 
 }

@@ -7,9 +7,9 @@ public class Start {
 
     public static void main(String[] args) {
         
-        GraphicMaze grap = new GraphicMaze();
-        
-        grap.showMaze();   
+//        GraphicMaze grap = new GraphicMaze();
+//        
+//        grap.showMaze();   
 
         Maze maze = new Maze();
         maze.execute();
