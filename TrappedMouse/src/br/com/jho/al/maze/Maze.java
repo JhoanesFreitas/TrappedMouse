@@ -121,7 +121,7 @@ public class Maze {
                 }
                 System.out.println("Caminhando...\t" + getCurrentCell().getX()
                         + getCurrentCell().getY());
-                
+
                 System.out.println(getBackTracking().size());
             }
 
