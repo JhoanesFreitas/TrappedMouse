@@ -6,13 +6,13 @@ import br.com.jho.al.swing.GraphicMaze;
 public class Start {
 
     public static void main(String[] args) {
-
-        Maze maze = new Maze();
-        maze.execute();
         
         GraphicMaze grap = new GraphicMaze();
         
-        grap.showMaze();
+        grap.showMaze();   
+
+        Maze maze = new Maze();
+        maze.execute();
  
     }
 }
