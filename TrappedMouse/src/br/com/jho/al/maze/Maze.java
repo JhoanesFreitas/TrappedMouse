@@ -79,7 +79,7 @@ public class Maze {
 
     private void exitMaze() {
         findValues();
-        trackBack();
+        backTrack();
     }
 
     private void findValues() {
@@ -99,7 +99,7 @@ public class Maze {
         return new Cell(i, j);
     }
 
-    private void trackBack() {
+    private void backTrack() {
 
         Tracking track = new Tracking(this);
 
@@ -113,7 +113,7 @@ public class Maze {
             while (!getCurrentCell().equals(getExitCell())) {
 
                 maze[getCurrentCell().getX()][getCurrentCell().getY()] = getVISITED();
-                track.trackBack(getCurrentCell());
+                track.backTrack(getCurrentCell());
 
                 if (getMazeStack().isEmpty()) {
                     System.out.println("Caminho não encontrado!");
