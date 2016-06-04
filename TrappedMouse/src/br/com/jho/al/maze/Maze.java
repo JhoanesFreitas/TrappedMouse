@@ -8,10 +8,14 @@ import java.util.ArrayList;
 import br.com.jho.al.constants.Constants;
 import br.com.jho.al.stackmanager.MyStack;
 import br.com.jho.al.start.Tracking;
+import java.awt.GridLayout;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class Maze {
+public class Maze extends JFrame {
 
     private Cell currentCell;
     private Cell exitCell;
@@ -34,6 +38,10 @@ public class Maze {
 
     private int value = -1;
     private BufferedReader br;
+    
+    JFrame frame;
+    JPanel panel;
+    JLabel[][] label;
 
     public void execute() {
         menu();
@@ -67,6 +75,8 @@ public class Maze {
                 break;
             case 2:
                 exitMaze();
+                showMaze();
+                showMazeConsole();
                 break;
             case 0:
                 print(Constants.BYE);
@@ -140,6 +150,13 @@ public class Maze {
             }
             System.out.println("Caminhando...\t" + getCurrentCell().getY()
                     + getCurrentCell().getX());
+            
+            for (int i = 0; i < sizeRow + 2; i++) {
+                for (int j = 0; j < sizeCol + 2; j++) {
+                    System.out.print(maze[i][j]);
+                }
+                System.out.println("");
+            }
         }
 
         if (getCurrentCell().equals(getExitCell())) {
@@ -190,6 +207,15 @@ public class Maze {
 
     private void print(String msg) {
         System.out.println(msg);
+    }
+    
+    public void showMazeConsole() {
+        for (int i = 0; i < sizeRow + 2; i++) {
+            for (int j = 0; j < sizeCol + 2; j++) {
+                System.out.print(maze[i][j]);
+            }
+            System.out.println();
+        }
     }
 
     private void fillMaze(ArrayList<String> array, int sizeRow, int sizeCol) {
@@ -258,6 +284,49 @@ public class Maze {
             }
         }
 
+    }
+    
+    //Métodos da animação
+    
+    public void showMaze() {
+        startWindow();
+        startPanelMain();
+        showWindow();
+    }
+    
+//    public void print() {
+//        panel.setLocation(sizeRow + 2, sizeCol + 2);
+//        
+//        for (int i = 0; i < sizeRow; i++) {
+//            for (int j = 0; j < sizeCol; j++) {
+//                label[i][j] = new JLabel(String.valueOf(maze[i][j]));
+//                panel.add(label[i][j]);
+//            }
+//        }
+//    }
+   
+    public void startWindow() {
+        frame = new JFrame("Maze");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    public void startPanelMain() {
+        panel = new JPanel();
+        panel.setLayout(new GridLayout(sizeRow + 2, sizeCol + 2));
+        
+        for (int i = 0; i < sizeRow; i++) {
+            for (int j = 0; j < sizeCol; j++) {
+                //label[i][j] = String.valueOf(maze[i][j]);
+                panel.add(label[i][j]);
+            }
+        }
+        frame.add(panel);
+    }
+    
+    public void showWindow() {
+        //frame.pack();
+        frame.setSize(600, 400);
+        frame.setVisible(true);
     }
 
     private char[][] initArray(int sizeRow, int sizeCol) {
