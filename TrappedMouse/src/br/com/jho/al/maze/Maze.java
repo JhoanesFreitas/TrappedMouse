@@ -75,7 +75,6 @@ public class Maze extends JFrame {
                 break;
             case 2:
                 exitMaze();
-                showMaze();
                 showMazeConsole();
                 break;
             case 0:
@@ -284,49 +283,6 @@ public class Maze extends JFrame {
             }
         }
 
-    }
-    
-    //Métodos da animação
-    
-    public void showMaze() {
-        startWindow();
-        startPanelMain();
-        showWindow();
-    }
-    
-//    public void print() {
-//        panel.setLocation(sizeRow + 2, sizeCol + 2);
-//        
-//        for (int i = 0; i < sizeRow; i++) {
-//            for (int j = 0; j < sizeCol; j++) {
-//                label[i][j] = new JLabel(String.valueOf(maze[i][j]));
-//                panel.add(label[i][j]);
-//            }
-//        }
-//    }
-   
-    public void startWindow() {
-        frame = new JFrame("Maze");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-    
-    public void startPanelMain() {
-        panel = new JPanel();
-        panel.setLayout(new GridLayout(sizeRow + 2, sizeCol + 2));
-        
-        for (int i = 0; i < sizeRow; i++) {
-            for (int j = 0; j < sizeCol; j++) {
-                //label[i][j] = String.valueOf(maze[i][j]);
-                panel.add(label[i][j]);
-            }
-        }
-        frame.add(panel);
-    }
-    
-    public void showWindow() {
-        //frame.pack();
-        frame.setSize(600, 400);
-        frame.setVisible(true);
     }
 
     private char[][] initArray(int sizeRow, int sizeCol) {
